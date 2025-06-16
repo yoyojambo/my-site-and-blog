@@ -32,22 +32,22 @@ const today = new Date();
 	&copy; 2025 Omar Flores. All rights reserved. <br/> <!-- Pretty sure it should be the year of publication, not the current year -->
   </p>
   <div class="other-links">
-	<a href="https://github.com/yoyojambo/portfolio">Source code for this page</a> <br/>
-	This page was based on the <a href="https://github.com/cloudflare/templates/tree/v1.1.2/astro-blog-starter-template">Astro Framework Starter</a> by Cloudflare
+	<a href="https://github.com/yoyojambo/portfolio">Source code for this site</a> <br/>
+	This site was based on the <a href="https://github.com/cloudflare/templates/tree/v1.1.2/astro-blog-starter-template">Astro Framework Starter</a> by Cloudflare
   </div>
 </footer>
 <style>
 	  footer {
 		padding: 2em 1em 0.5em 1em;
 		background: linear-gradient(var(--gray-gradient)) no-repeat;
-		color: rgb(var(--gray));
+		color: var(--theme-text-primary);
 		text-align: center;
 	  }
 	  .other-links a {
-		color: #000d8a; /* --accent-dark was not applying */
+		color: var(--theme-text-link);
 	  }
 	  .other-links a:hover {
-		color: rgb(var(--gray-dark));
+		color: var(--theme-text-link-hover);
 	  }
 	  .social-links {
 		display: flex;
@@ -57,9 +57,10 @@ const today = new Date();
 	  }
 	  .social-links a {
 		text-decoration: none;
-		color: rgb(var(--gray));
+		color: var(--gray);
 	  }
 	  .social-links a:hover {
-		color: rgb(var(--gray-dark));
+		color: var(--accent);
 	  }
+	  
 </style>

@@ -2,6 +2,8 @@
 import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import ThemeToggle from '../../components/ThemeToggle.astro';
+
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
@@ -59,11 +61,11 @@ const posts = (await getCollection('blog')).sort(
 			}
 			.date {
 				margin: 0;
-				color: rgb(var(--gray));
+				color: var(--theme-text-secondary);
 			}
 			ul li a:hover h4,
 			ul li a:hover .date {
-				color: rgb(var(--accent));
+				color: var(--accent-secondary);
 			}
 			ul a:hover img {
 				box-shadow: var(--box-shadow);
@@ -87,6 +89,7 @@ const posts = (await getCollection('blog')).sort(
 	</head>
 	<body>
 		<Header />
+	  <ThemeToggle client:load class="floating-theme-toggle" />
 		<main>
 			<section>
 				<ul>
@@ -106,6 +109,6 @@ const posts = (await getCollection('blog')).sort(
 				</ul>
 			</section>
 		</main>
-		<Footer />
+	  <Footer />
 	</body>
 </html>

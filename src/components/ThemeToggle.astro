@@ -1,0 +1,142 @@
+<!-- src/components/ThemeToggle.astro -->
+<div id="theme-toggle-group" role="radiogroup" aria-label="Select theme">
+  <button id="theme-doom-one" aria-label="Doom One theme" data-theme="doom-one">
+    <span class="icon emacs-icon" aria-hidden="true">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 50 50"
+        fill="currentColor"
+        width="1em"
+        height="1em"
+      >
+        <path d="M25 0C11.2 0 0 11.2 0 25s11.2 25 25 25 25-11.2 25-25S38.8 0 25 0zm-8 10h16c.6 0 1 .4 1 1v4c0 .6-.4 1-1 1h-5v5h5c.6 0 1 .4 1 1v4c0 .6-.4 1-1 1h-5v5h5c.6 0 1 .4 1 1v4c0 .6-.4 1-1 1h-16c-.6 0-1-.4-1-1v-4c0-.6.4-1 1-1h5v-5h-5c-.6 0-1-.4-1-1v-4c0-.6.4-1 1-1h5v-5h-5c-.6 0-1-.4-1-1V11c0-.6.4-1 1-1z"/>
+      </svg>
+    </span>
+  </button>
+
+  <button id="theme-dark" aria-label="Dark theme" data-theme="dark">
+    <span class="icon dark-icon" aria-hidden="true">&#9790;</span>
+  </button>
+
+  <button id="theme-light" aria-label="Light theme" data-theme="light">
+    <span class="icon light-icon" aria-hidden="true">&#9728;</span>
+  </button>
+</div>
+
+<style>
+  #theme-toggle-group {
+    display: inline-flex; /* Arrange buttons side-by-side */
+    border: 1px solid var(--theme-border-color); /* Single border for the group */
+    border-radius: 8px; /* Rounded corners for the group */
+    overflow: hidden; /* Ensures inner borders/backgrounds clip to parent radius */
+    background: var(--theme-bg-component); /* Background for the group */
+    transition: background 0.3s ease, border-color 0.3s ease;
+	max-width: 
+  }
+
+  #theme-toggle-group button {
+    background: transparent; /* Transparent background for individual buttons */
+    color: var(--theme-text-secondary); /* Inactive icon color */
+    border: none; /* No individual button borders */
+    padding: 0.5rem 0.8rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      background 0.3s ease,
+      color 0.3s ease;
+  }
+
+  /* Vertical separators between buttons */
+  #theme-toggle-group button:not(:last-child) {
+    border-right: 1px solid var(--theme-border-color);
+  }
+
+  /* Hover effect for inactive buttons */
+  #theme-toggle-group button:not(.active):hover {
+    background: var(--theme-border-color); /* Subtle hover for inactive */
+    color: var(--theme-text-primary); /* Text color becomes more prominent on hover */
+    transform: translateY(-1px);
+  }
+  #theme-toggle-group button:not(.active):active {
+      transform: translateY(0);
+  }
+
+
+  /* Active button styling */
+  #theme-toggle-group button.active {
+    background: var(--accent); /* Highlight with accent color */
+    color: var(--theme-bg-page); /* Text color contrasts with accent */
+    cursor: default; /* No hover cursor on active button */
+    pointer-events: none; /* Prevent clicks on active button */
+  }
+
+  /* Icon styling (similar to previous, but simpler as only one icon per button) */
+  .icon {
+    font-size: 1.5em;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1em;
+    height: 1em;
+  }
+
+  .icon svg {
+    font-size: 1em; /* Ensure SVG scales to container */
+    width: 1em;
+    height: 1em;
+  }
+</style>
+
+<script>
+  // Get references to the button group and the root HTML element
+  const themeToggleGroup = document.getElementById('theme-toggle-group');
+  const themeButtons = themeToggleGroup.querySelectorAll('button'); // Get all buttons
+  const htmlElement = document.documentElement; // This is the <html> tag
+
+  // Define the theme cycle order (same as before)
+  const themeCycle = ['doom-one', 'light', 'dark'];
+
+  // Function to set the theme and update active button state
+  function setTheme(theme) {
+    // 1. Update HTML element class
+    htmlElement.classList.remove(...themeCycle.map(t => `theme-${t}`));
+    htmlElement.classList.add(`theme-${theme}`);
+
+    // 2. Update active class on buttons
+    themeButtons.forEach(button => {
+      if (button.dataset.theme === theme) {
+        button.classList.add('active');
+        button.setAttribute('aria-pressed', 'true'); // For accessibility
+      } else {
+        button.classList.remove('active');
+        button.setAttribute('aria-pressed', 'false');
+      }
+    });
+
+    // 3. Save preference to localStorage
+    localStorage.setItem('theme', theme);
+  }
+
+  // Event listener: On page load, check for a saved theme and apply it
+  document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme');
+    // If a theme is saved, use it. Otherwise, default to 'doom-one'.
+    setTheme(savedTheme || 'doom-one');
+  });
+
+  // Event listener: Listen for clicks on the group, then check which button was clicked
+  themeToggleGroup.addEventListener('click', (event) => {
+    const clickedButton = event.target.closest('button'); // Find the closest button parent
+
+    if (clickedButton) { // Ensure a button was actually clicked
+      const newTheme = clickedButton.dataset.theme; // Get the theme from its data-theme attribute
+      if (newTheme) { // Ensure it has a data-theme attribute
+        setTheme(newTheme);
+      }
+    }
+  });
+</script>
