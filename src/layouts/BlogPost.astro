@@ -58,6 +58,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 	<body>
 		<Header />
 		<main>
+		  <ThemeToggle />
 			<article>
 				<div class="hero-image">
 					{heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
@@ -82,6 +83,5 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			</article>
 		</main>
 	  <Footer />
-	  <ThemeToggle client:load class="floating-theme-toggle" />
 	</body>
 </html>

@@ -1,140 +1,195 @@
-<!-- src/components/ThemeToggle.astro -->
-<div id="theme-toggle-group" role="radiogroup" aria-label="Select theme">
+---
+export interface Props {
+  icons?: {
+    'doom-one'?: string;
+    dark?: string;
+    light?: string;
+  };
+}
+
+const { icons = {} } = Astro.props;
+
+// Default icons (you can override these via props)
+// Got the Doom logo from wikipedia.org/wiki/File:Doom_–_Game’s_logo.svg
+const defaultIcons = {
+  'doom-one': `<svg
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:cc="http://creativecommons.org/ns#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:svg="http://www.w3.org/2000/svg"
+  xmlns="http://www.w3.org/2000/svg"
+  version="1.1"
+  id="svg2"
+  viewBox="0 0 1680 869.19995"
+  height="20"
+  width="1680">
+  <defs
+  id="defs4" />
+  <metadata
+  id="metadata7">
+  <rdf:RDF>
+  <cc:Work
+  rdf:about="">
+  <dc:format>image/svg+xml</dc:format>
+  <dc:type
+  rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+  <dc:title></dc:title>
+  </cc:Work>
+  </rdf:RDF>
+  </metadata>
+  <g
+  transform="translate(-7.1328025,-565.73124)"
+  id="layer1">
+  <path
+  id="path3347"
+  d="m 1476.3012,1327.8121 -0.2917,-292.4969 -46.7662,163.4072 -46.7058,-162.6616 -0.2827,222.0343 -152.4945,-114.3724 11.559,-8.6664 -0.5292,-569.30683 144.9467,0.3774 43.4492,152.19623 43.5126,-152.40042 214.4342,0.69673 -70.3645,52.57665 -0.1246,814.42954 z M 78.328958,619.06163 7.1328025,565.73124 l 401.3006875,0.54398 45.93055,35.08717 0.0378,533.50351 12.16772,8.8133 -388.148567,291.252 z m 235.518822,416.21877 -0.15295,-307.89242 -10.75764,-8.78449 -83.44785,0.40375 -0.18291,387.17176 z m 152.39799,82.7814 -0.0717,-516.75483 47.07325,-35.27648 281.69722,-0.0156 46.98005,35.42167 0.17344,597.96244 -133.22444,100.1999 z m 223.12917,-399.76328 -71.04792,0.49268 -11.09868,8.52709 0.15885,308.10291 93.32018,69.9936 0.24947,-377.92826 z m 164.80854,481.66028 -0.34116,-598.79687 46.91876,-35.23879 282.06992,0.26967 47.2183,35.27898 -0.3246,515.55821 -241.33557,182.4526 z m 234.65122,-164.742 -0.03,-308.02638 -11.8726,-9.07298 -70.9365,0.23276 -11.40484,8.78228 0.70414,377.32652 z"
+  style="fill:#000000;fill-opacity:1;stroke:none" />
+  </g>
+  </svg>`,
+  dark: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+  <path d="M21.64 13a1 1 0 0 0-1.05-.14 8.05 8.05 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05z"/>
+  </svg>`,
+  light: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+  <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+  </svg>`
+};
+
+const finalIcons = { ...defaultIcons, ...icons };
+---
+
+<div 
+  class="floating-theme-toggle" 
+  id="theme-toggle-group" 
+  role="radiogroup" 
+  aria-label="Select theme"
+>
   <button id="theme-doom-one" aria-label="Doom One theme" data-theme="doom-one">
-    <span class="icon emacs-icon" aria-hidden="true">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 50 50"
-        fill="currentColor"
-        width="1em"
-        height="1em"
-      >
-        <path d="M25 0C11.2 0 0 11.2 0 25s11.2 25 25 25 25-11.2 25-25S38.8 0 25 0zm-8 10h16c.6 0 1 .4 1 1v4c0 .6-.4 1-1 1h-5v5h5c.6 0 1 .4 1 1v4c0 .6-.4 1-1 1h-5v5h5c.6 0 1 .4 1 1v4c0 .6-.4 1-1 1h-16c-.6 0-1-.4-1-1v-4c0-.6.4-1 1-1h5v-5h-5c-.6 0-1-.4-1-1v-4c0-.6.4-1 1-1h5v-5h-5c-.6 0-1-.4-1-1V11c0-.6.4-1 1-1z"/>
-      </svg>
-    </span>
+    <span class="icon" aria-hidden="true" set:html={finalIcons['doom-one']} />
   </button>
 
   <button id="theme-dark" aria-label="Dark theme" data-theme="dark">
-    <span class="icon dark-icon" aria-hidden="true">&#9790;</span>
+    <span class="icon" aria-hidden="true" set:html={finalIcons.dark} />
   </button>
 
   <button id="theme-light" aria-label="Light theme" data-theme="light">
-    <span class="icon light-icon" aria-hidden="true">&#9728;</span>
+    <span class="icon" aria-hidden="true" set:html={finalIcons.light} />
   </button>
 </div>
 
 <style>
+  .floating-theme-toggle {
+    position: fixed;
+    top: 20%;
+    right: 1rem;
+    z-index: 1000;
+    
+    /* Hide on small screens */
+    display: none;
+  }
+
+  /* Show only on medium screens and up */
+  @media (min-width: 768px) {
+    .floating-theme-toggle {
+      display: flex;
+      flex-direction: column; /* Vertical layout */
+    }
+  }
+  
   #theme-toggle-group {
-    display: inline-flex; /* Arrange buttons side-by-side */
-    border: 1px solid var(--theme-border-color); /* Single border for the group */
-    border-radius: 8px; /* Rounded corners for the group */
-    overflow: hidden; /* Ensures inner borders/backgrounds clip to parent radius */
-    background: var(--theme-bg-component); /* Background for the group */
-    transition: background 0.3s ease, border-color 0.3s ease;
-	max-width: 
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    border: 1px solid var(--theme-border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--theme-bg-component);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
   #theme-toggle-group button {
-    background: transparent; /* Transparent background for individual buttons */
-    color: var(--theme-text-secondary); /* Inactive icon color */
-    border: none; /* No individual button borders */
-    padding: 0.5rem 0.8rem;
-    font-size: 1.2rem;
+    background: transparent;
+    color: var(--theme-text-secondary);
+    border: none;
+    padding: 0.75rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition:
-      background 0.3s ease,
-      color 0.3s ease;
+    transition: all 0.2s ease;
+    min-width: 2.5rem;
+    min-height: 2.5rem;
   }
 
-  /* Vertical separators between buttons */
+  /* Horizontal separators between buttons (since we're vertical now) */
   #theme-toggle-group button:not(:last-child) {
-    border-right: 1px solid var(--theme-border-color);
+    border-bottom: 1px solid var(--theme-border-color);
   }
 
-  /* Hover effect for inactive buttons */
   #theme-toggle-group button:not(.active):hover {
-    background: var(--theme-border-color); /* Subtle hover for inactive */
-    color: var(--theme-text-primary); /* Text color becomes more prominent on hover */
-    transform: translateY(-1px);
+    background: var(--theme-border-color);
+    color: var(--theme-text-primary);
   }
+
   #theme-toggle-group button:not(.active):active {
-      transform: translateY(0);
+    transform: translateX(0);
   }
 
-
-  /* Active button styling */
   #theme-toggle-group button.active {
-    background: var(--accent); /* Highlight with accent color */
-    color: var(--theme-bg-page); /* Text color contrasts with accent */
-    cursor: default; /* No hover cursor on active button */
-    pointer-events: none; /* Prevent clicks on active button */
+    background: var(--accent);
+    color: var(--theme-bg-page);
+    cursor: default;
+    pointer-events: none;
   }
 
-  /* Icon styling (similar to previous, but simpler as only one icon per button) */
   .icon {
-    font-size: 1.5em;
-    line-height: 1;
+    width: 1.25rem;
+    height: 1.25rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 1em;
-    height: 1em;
   }
 
   .icon svg {
-    font-size: 1em; /* Ensure SVG scales to container */
-    width: 1em;
-    height: 1em;
+    width: 100%;
+    height: 100%;
+	max-height: 20px;
   }
 </style>
 
 <script>
-  // Get references to the button group and the root HTML element
   const themeToggleGroup = document.getElementById('theme-toggle-group');
-  const themeButtons = themeToggleGroup.querySelectorAll('button'); // Get all buttons
-  const htmlElement = document.documentElement; // This is the <html> tag
+  const themeButtons = themeToggleGroup?.querySelectorAll('button');
+  const htmlElement = document.documentElement;
 
-  // Define the theme cycle order (same as before)
   const themeCycle = ['doom-one', 'light', 'dark'];
 
-  // Function to set the theme and update active button state
-  function setTheme(theme) {
-    // 1. Update HTML element class
+  function setTheme(theme: string) {
     htmlElement.classList.remove(...themeCycle.map(t => `theme-${t}`));
     htmlElement.classList.add(`theme-${theme}`);
 
-    // 2. Update active class on buttons
-    themeButtons.forEach(button => {
+    themeButtons?.forEach(button => {
       if (button.dataset.theme === theme) {
         button.classList.add('active');
-        button.setAttribute('aria-pressed', 'true'); // For accessibility
+        button.setAttribute('aria-pressed', 'true');
       } else {
         button.classList.remove('active');
         button.setAttribute('aria-pressed', 'false');
       }
     });
 
-    // 3. Save preference to localStorage
     localStorage.setItem('theme', theme);
   }
 
-  // Event listener: On page load, check for a saved theme and apply it
   document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme');
-    // If a theme is saved, use it. Otherwise, default to 'doom-one'.
     setTheme(savedTheme || 'doom-one');
   });
 
-  // Event listener: Listen for clicks on the group, then check which button was clicked
-  themeToggleGroup.addEventListener('click', (event) => {
-    const clickedButton = event.target.closest('button'); // Find the closest button parent
-
-    if (clickedButton) { // Ensure a button was actually clicked
-      const newTheme = clickedButton.dataset.theme; // Get the theme from its data-theme attribute
-      if (newTheme) { // Ensure it has a data-theme attribute
+  themeToggleGroup?.addEventListener('click', (event) => {
+    const clickedButton = (event.target as Element).closest('button');
+    
+    if (clickedButton) {
+      const newTheme = clickedButton.dataset.theme;
+      if (newTheme) {
         setTheme(newTheme);
       }
     }

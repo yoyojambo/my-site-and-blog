@@ -291,21 +291,6 @@ hr {
   border-top: 1px solid var(--theme-border-color);
 }
 
-.floating-theme-toggle {
-  position: fixed; /* Stays in the same spot relative to the viewport */
-  top: 0%;    /* Adjust distance from the bottom */
-  right: 0%;     /* Adjust distance from the right */
-  z-index: 1000;   /* Ensure it stays on top of other content */
-  
-  /* THIS IS THE KEY CHANGE: */
-  width: fit-content; /* Make the container only as wide as its content */
-  /* Or, alternatively, if you use the #theme-toggle-group in ThemeToggle.astro: */
-  display: inline-flex; /* This would also make it shrink-wrap its content */
-
-  /* You might also want to explicitly set a max-width if it gets too big on large screens */
-  max-width: 200px;
-}
-
 /* ===== RESPONSIVE ===== */
 @media (max-width: 720px) {
   body {
@@ -313,10 +298,6 @@ hr {
   }
   main {
     padding: 1em;
-  }
-  .floating-theme-toggle {
-    bottom: 1rem; /* Closer to bottom on small screens */
-    right: 1rem;  /* Closer to right on small screens */
   }
 }
 
