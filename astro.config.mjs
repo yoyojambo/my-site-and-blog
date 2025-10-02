@@ -5,16 +5,18 @@ import sitemap from "@astrojs/sitemap";
 
 import cloudflare from "@astrojs/cloudflare";
 
+import org from "astro-org";
+
 // https://astro.build/config
 export default defineConfig({
-	site: "https://example.com",
-	image: {
-		domains: ["avatars.githubusercontent.com"]
-	},
-	integrations: [mdx(), sitemap()],
-	adapter: cloudflare({
-		platformProxy: {
-			enabled: true,
-		},
-	}),
+    site: "https://blog.yoyojambo.com",
+    image: {
+        domains: ["avatars.githubusercontent.com"]
+    },
+    integrations: [mdx(), sitemap()],
+    adapter: cloudflare({
+        platformProxy: {
+            enabled: true,
+        },
+    }),
 });
