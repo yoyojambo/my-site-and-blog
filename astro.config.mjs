@@ -5,7 +5,7 @@ import sitemap from "@astrojs/sitemap";
 
 import cloudflare from "@astrojs/cloudflare";
 
-import org from "astro-org";
+//import org from "astro-org";
 
 // https://astro.build/config
 export default defineConfig({
