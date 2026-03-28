@@ -8,9 +8,11 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const posts = (await getCollection('blog', ({ data }) => {
+  return import.meta.env.DEV || !data.draft;
+  })).sort(
+	  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  );
 ---
 
 <!doctype html>
@@ -88,26 +90,39 @@ const posts = (await getCollection('blog')).sort(
 		</style>
 	</head>
 	<body>
-		<Header />
+	  <Header />
 	  <ThemeToggle />
 		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
+		  <section>
+			{
+				posts.length > 0 ? (
+					<ul>
+						{posts.map((post) => (
 							<li>
 								<a href={`/blog/${post.id}/`}>
-									<img width={720} height={360} src={post.data.heroImage} alt="" />
+									<img
+										width={720}
+										height={360}
+										src={post.data.heroImage}
+										alt=""
+									/>
 									<h4 class="title">{post.data.title}</h4>
 									<p class="date">
 										<FormattedDate date={post.data.pubDate} />
 									</p>
 								</a>
 							</li>
-						))
-					}
-				</ul>
-			</section>
+						))}
+					</ul>
+				) : (
+					<div class="no-posts">
+						<h2>No posts found</h2>
+						<p>I am probably fixing something, but it should not be long.</p>
+						<p>Check back later for new content or stay tuned!</p>
+					</div>
+				)
+			}
+		  </section>
 		</main>
 	  <Footer />
 	</body>
