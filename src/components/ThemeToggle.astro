@@ -159,10 +159,13 @@ const finalIcons = { ...defaultIcons, ...icons };
   const themeToggleGroup = document.getElementById('theme-toggle-group');
   const themeButtons = themeToggleGroup?.querySelectorAll('button');
   const htmlElement = document.documentElement;
-
   const themeCycle = ['doom-one', 'light', 'dark'];
 
-  function setTheme(theme: string) {
+  function setTheme(theme: string, animate = true) {
+    if (animate) {
+      htmlElement.classList.add('theme-transition');
+    }
+    
     htmlElement.classList.remove(...themeCycle.map(t => `theme-${t}`));
     htmlElement.classList.add(`theme-${theme}`);
 
@@ -177,12 +180,18 @@ const finalIcons = { ...defaultIcons, ...icons };
     });
 
     localStorage.setItem('theme', theme);
+    
+    if (animate) {
+      // Remove the transition class after the animation completes
+      setTimeout(() => {
+        htmlElement.classList.remove('theme-transition');
+      }, 300);
+    }
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const savedTheme = localStorage.getItem('theme');
-    setTheme(savedTheme || 'doom-one');
-  });
+  // Initialize UI state
+  const currentTheme = localStorage.getItem('theme') || 'doom-one';
+  setTheme(currentTheme, false);
 
   themeToggleGroup?.addEventListener('click', (event) => {
     const clickedButton = (event.target as Element).closest('button');

@@ -1,6 +1,6 @@
 /* ===== THEME SYSTEM ===== */
 /* Default Theme: Doom One (Dark) */
-:root {
+:root, :root.theme-doom-one {
   /* --- Doom One Color Palette --- */
   --doom-one-bg: #282C34;
   --doom-one-bg-alt: #21242B;
@@ -9,13 +9,13 @@
   --doom-one-text-alt: #5C6370;
   --doom-one-purple: #C678DD;
   --doom-one-blue: #61AFEF;
-  --doom-one-cyan: #56B6C2;
+  --doom-one-cyan: #56B6B2;
   --doom-one-green: #98C379;
   --doom-one-orange: #D19A66;
   --doom-one-red: #E06C75;
   --doom-one-yellow: #E5C07B;
 
-  /* --- Theme Variables (Doom One as Default) --- */
+  /* --- Theme Variables --- */
   --theme-bg-page: var(--doom-one-bg);
   --theme-bg-component: var(--doom-one-bg-alt);
   --theme-bg-card: var(--doom-one-bg-card);
@@ -25,21 +25,21 @@
   --theme-text-link-hover: var(--doom-one-orange);
   --theme-border-color: #3e4451;
 
-  /* --- Legacy Variables (mapped to Doom One) --- */
+  /* --- Legacy Variables (mapped to current theme) --- */
   --accent: var(--doom-one-purple);
-  --accent-secondary: var(--doom-one-blue); /* Darker purple for hover states */
-  --accent-dark: #A855C7; /* Darker purple for hover states */
-  --black: 171, 178, 191; /* Doom One text color as RGB values */
-  --gray: 92, 99, 112; /* Doom One secondary text as RGB values */
-  --gray-light: 62, 68, 81; /* Darker "light" for dark theme borders */
-  --gray-dark: 40, 44, 52; /* Doom One background as RGB values */
+  --accent-secondary: var(--doom-one-blue);
+  --accent-dark: #A855C7;
+  --black: 171, 178, 191;
+  --gray: 92, 99, 112;
+  --gray-light: 62, 68, 81;
+  --gray-dark: 40, 44, 52;
   --gray-gradient: rgba(var(--gray-light), 50%), var(--theme-bg-page);
   --box-shadow:
     0 2px 6px rgba(0, 0, 0, 0.3), 
     0 8px 24px rgba(0, 0, 0, 0.2),
     0 16px 32px rgba(0, 0, 0, 0.1);
 
-  /* --- Code Highlighting (Doom One) --- */
+  /* --- Code Highlighting --- */
   --code-bg: var(--theme-bg-component);
   --code-text: var(--theme-text-primary);
   --code-keyword: var(--doom-one-purple);
@@ -153,8 +153,14 @@ body {
   color: var(--theme-text-primary);
   font-size: 20px;
   line-height: 1.7;
-  /* Add smooth transitions for theme switching */
-  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Smooth transitions ONLY when theme is changed manually.
+   The .theme-initial class can be used to prevent transitions on page load if needed,
+   but since we apply the class in <head>, the transition won't fire on first paint anyway. */
+html.theme-transition body,
+html.theme-transition body * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, fill 0.3s ease !important;
 }
 
 main {
