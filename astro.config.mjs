@@ -9,7 +9,7 @@ import cloudflare from "@astrojs/cloudflare";
 
 // https://astro.build/config
 export default defineConfig({
-    site: "https://blog.yoyojambo.com",
+    site: "https://yoyojambo.com",
     image: {
         domains: ["avatars.githubusercontent.com"]
     },
