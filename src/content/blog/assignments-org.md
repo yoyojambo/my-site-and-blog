@@ -41,3 +41,18 @@ If you *do* want to get to know what org mode offers, there is:
 You can export to any format from any .org file with the necessary tools (LaTeX, Beamer,
 etc.). But the basic document format probably does not look good enough to 
 
+```json
+{
+	"hello": "there"
+}
+```
+
+asdasd
+```go
+fmt.Println("Lol")
+```
+
+```org
+* headline 1
+** headline 2
+```
