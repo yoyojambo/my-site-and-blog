@@ -1,6 +1,7 @@
 /* ===== THEME SYSTEM ===== */
 /* Default Theme: Doom One (Dark) */
-:root, :root.theme-doom-one {
+:root,
+:root.theme-doom-one {
   /* --- Doom One Color Palette --- */
   --doom-one-bg: #282C34;
   --doom-one-bg-alt: #21242B;
@@ -35,7 +36,7 @@
   --gray-dark: 40, 44, 52;
   --gray-gradient: rgba(var(--gray-light), 50%), var(--theme-bg-page);
   --box-shadow:
-    0 2px 6px rgba(0, 0, 0, 0.3), 
+    0 2px 6px rgba(0, 0, 0, 0.3),
     0 8px 24px rgba(0, 0, 0, 0.2),
     0 16px 32px rgba(0, 0, 0, 0.1);
 
@@ -72,7 +73,7 @@
   --gray-dark: 34, 41, 57;
   --gray-gradient: rgba(var(--gray-light), 50%), #fff;
   --box-shadow:
-    0 2px 6px rgba(var(--gray), 25%), 
+    0 2px 6px rgba(var(--gray), 25%),
     0 8px 24px rgba(var(--gray), 33%),
     0 16px 32px rgba(var(--gray), 33%);
 
@@ -109,7 +110,7 @@
   --gray-dark: 26, 26, 26;
   --gray-gradient: rgba(var(--gray-light), 50%), var(--theme-bg-page);
   --box-shadow:
-    0 2px 6px rgba(0, 0, 0, 0.4), 
+    0 2px 6px rgba(0, 0, 0, 0.4),
     0 8px 24px rgba(0, 0, 0, 0.3),
     0 16px 32px rgba(0, 0, 0, 0.2);
 
@@ -132,6 +133,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: "Atkinson";
   src: url("/fonts/atkinson-bold.woff") format("woff");
@@ -170,20 +172,40 @@ main {
   padding: 3em 1em;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0 0 0.5rem 0;
   color: rgb(var(--black));
   line-height: 1.2;
   transition: color 0.3s ease;
 }
 
-h1 { font-size: 3.052em; }
-h2 { font-size: 2.441em; }
-h3 { font-size: 1.953em; }
-h4 { font-size: 1.563em; }
-h5 { font-size: 1.25em; }
+h1 {
+  font-size: 3.052em;
+}
 
-strong, b {
+h2 {
+  font-size: 2.441em;
+}
+
+h3 {
+  font-size: 1.953em;
+}
+
+h4 {
+  font-size: 1.563em;
+}
+
+h5 {
+  font-size: 1.25em;
+}
+
+strong,
+b {
   font-weight: 700;
 }
 
@@ -263,7 +285,7 @@ pre {
   font-family: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', monospace;
 }
 
-pre > code {
+pre>code {
   all: unset;
 }
 
@@ -273,15 +295,42 @@ pre > code {
   color: var(--code-text) !important;
 }
 
-.shiki-token-keyword { color: var(--code-keyword); }
-.shiki-token-string { color: var(--code-string); }
-.shiki-token-comment { color: var(--code-comment); font-style: italic; }
-.shiki-token-number { color: var(--code-number); }
-.shiki-token-function { color: var(--code-function); }
-.shiki-token-type { color: var(--code-type); }
-.shiki-token-constant { color: var(--code-number); }
-.shiki-token-parameter { color: var(--code-text); }
-.shiki-token-punctuation { color: var(--theme-text-secondary); }
+.shiki-token-keyword {
+  color: var(--code-keyword);
+}
+
+.shiki-token-string {
+  color: var(--code-string);
+}
+
+.shiki-token-comment {
+  color: var(--code-comment);
+  font-style: italic;
+}
+
+.shiki-token-number {
+  color: var(--code-number);
+}
+
+.shiki-token-function {
+  color: var(--code-function);
+}
+
+.shiki-token-type {
+  color: var(--code-type);
+}
+
+.shiki-token-constant {
+  color: var(--code-number);
+}
+
+.shiki-token-parameter {
+  color: var(--code-text);
+}
+
+.shiki-token-punctuation {
+  color: var(--theme-text-secondary);
+}
 
 blockquote {
   border-left: 4px solid var(--accent);
@@ -315,6 +364,7 @@ hr {
   gap: 1rem;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
 
 .project-card:hover {
@@ -346,12 +396,10 @@ hr {
 .tool-icon {
   width: 24px;
   height: 24px;
-  filter: grayscale(1) brightness(1.2);
   transition: all 0.2s ease;
 }
 
 .project-card:hover .tool-icon {
-  filter: grayscale(0) brightness(1);
   transform: scale(1.1);
 }
 
@@ -380,6 +428,145 @@ hr {
   background: var(--accent);
   color: white;
   border-color: var(--accent);
+}
+
+/* ===== PROJECT MODAL STYLES ===== */
+.project-modal {
+  padding: 0;
+  border: none;
+  background: transparent;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  margin: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  /* Hidden by default */
+  align-items: center;
+  justify-content: center;
+}
+
+.project-modal[open] {
+  display: flex;
+  /* Shown only when open */
+}
+
+.project-modal::backdrop {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.modal-container {
+  background: var(--theme-bg-page);
+  color: var(--theme-text-primary);
+  width: 90%;
+  max-width: 900px;
+  max-height: 85vh;
+  border-radius: 20px;
+  border: 1px solid var(--theme-border-color);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  animation: modal-appear 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modal-appear {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-header {
+  padding: 1.5rem 2.5rem;
+  border-bottom: 1px solid var(--theme-border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--theme-bg-component);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 2rem;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+}
+
+.modal-close {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--theme-border-color);
+  color: var(--theme-text-secondary);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+  background: var(--doom-one-red);
+  color: white;
+  border-color: var(--doom-one-red);
+}
+
+.modal-body {
+  padding: 2.5rem;
+  overflow-y: auto;
+  line-height: 1.8;
+}
+
+.modal-body.prose h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+  color: var(--accent-secondary);
+}
+
+.modal-body.prose ul {
+  margin-bottom: 1.5rem;
+}
+
+.modal-body.prose li {
+  margin-bottom: 0.5rem;
+}
+
+/* Custom Scrollbar for Modal Body */
+.modal-body::-webkit-scrollbar {
+  width: 10px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+  background: var(--theme-bg-page);
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background: var(--theme-border-color);
+  border-radius: 10px;
+  border: 3px solid var(--theme-bg-page);
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+  background: var(--theme-text-secondary);
 }
 
 /* ===== SKILLS SECTION ===== */
@@ -433,6 +620,7 @@ hr {
   body {
     font-size: 18px;
   }
+
   main {
     padding: 1em;
   }

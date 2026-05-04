@@ -5,41 +5,112 @@ interface Props {
   tools: string[];
   githubUrl?: string;
   liveUrl?: string;
+  Content: any;
 }
 
-const { title, description, tools, githubUrl, liveUrl } = Astro.props;
+const { title, description, tools, githubUrl, liveUrl, Content } = Astro.props;
 
 // Helper to get Simple Icons URL
 const getIconUrl = (tool: string) => `https://cdn.simpleicons.org/${tool.toLowerCase().replace(/\s+/g, '')}`;
+
+// Create a safe ID for the modal
+const modalId = `modal-${title.toLowerCase().replace(/\s+/g, '-')}`;
 ---
 
-<div class="project-card">
-  <h3>{title}</h3>
-  <p>{description}</p>
-  
-  <div class="project-tools">
-    {tools.map((tool) => (
-      <img 
-        src={getIconUrl(tool)} 
-        alt={tool} 
-        title={tool}
-        class="tool-icon"
-      />
-    ))}
+<div class="project-card-wrapper">
+  <div class="project-card" data-modal-target={modalId}>
+    <h3>{title}</h3>
+    <p>{description}</p>
+    
+    <div class="project-tools">
+      {tools.map((tool) => (
+        <img 
+          src={getIconUrl(tool)} 
+          alt={tool} 
+          title={tool}
+          class="tool-icon"
+        />
+      ))}
+    </div>
+
+    <div class="project-links">
+      {githubUrl && (
+        <a href={githubUrl} target="_blank" rel="noopener noreferrer" class="project-link" onclick="event.stopPropagation()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+          GitHub
+        </a>
+      )}
+      {liveUrl && (
+        <a href={liveUrl} target="_blank" rel="noopener noreferrer" class="project-link" onclick="event.stopPropagation()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          Live Demo
+        </a>
+      )}
+    </div>
   </div>
 
-  <div class="project-links">
-    {githubUrl && (
-      <a href={githubUrl} target="_blank" rel="noopener noreferrer" class="project-link">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-        GitHub
-      </a>
-    )}
-    {liveUrl && (
-      <a href={liveUrl} target="_blank" rel="noopener noreferrer" class="project-link">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-        Live Demo
-      </a>
-    )}
-  </div>
+  <dialog id={modalId} class="project-modal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h2>{title}</h2>
+        <button class="modal-close" data-modal-close>&times;</button>
+      </div>
+      <div class="modal-body prose">
+        <Content />
+      </div>
+    </div>
+  </dialog>
 </div>
+
+<script>
+  // This script runs only once per page load
+  function initModals() {
+    const modalButtons = document.querySelectorAll('[data-modal-target]');
+    
+    modalButtons.forEach(button => {
+      const modalId = button.getAttribute('data-modal-target');
+      const modal = document.getElementById(modalId!) as HTMLDialogElement;
+      
+      if (!modal) return;
+
+      const closeButton = modal.querySelector('[data-modal-close]');
+
+      // Open modal
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        modal.showModal();
+        document.body.style.overflow = 'hidden';
+      });
+
+      // Close modal on button click
+      closeButton?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        modal.close();
+      });
+
+      // Close modal on backdrop click
+      modal.addEventListener('click', (e) => {
+        const dialogDimensions = modal.getBoundingClientRect();
+        if (
+          e.clientX < dialogDimensions.left ||
+          e.clientX > dialogDimensions.right ||
+          e.clientY < dialogDimensions.top ||
+          e.clientY > dialogDimensions.bottom
+        ) {
+          modal.close();
+        }
+      });
+
+      // Restore scrolling on close
+      modal.addEventListener('close', () => {
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+  // Initialize on load
+  initModals();
+
+  // Re-initialize after view transitions (if any)
+  document.addEventListener('astro:after-swap', initModals);
+</script>
