@@ -6,11 +6,14 @@ import ThemeToggle from '../components/ThemeToggle.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import TechIcons from '../components/TechIcons.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
-const projects = (await getCollection('projects')).sort(
-  (a, b) => a.data.order - b.data.order
-);
+const projects = await Promise.all((await getCollection('projects')).map(async (project) => {
+  const rendered = await render(project);
+  return { ...project, Content: rendered.Content };
+}));
+
+projects.sort((a, b) => a.data.order - b.data.order);
 ---
 
 <!doctype html>
@@ -46,6 +49,7 @@ const projects = (await getCollection('projects')).sort(
 	          tools={project.data.tools}
 	          githubUrl={project.data.githubUrl}
 	          liveUrl={project.data.liveUrl}
+	          Content={project.Content}
 	        />
 	      ))}
 	    </div>
