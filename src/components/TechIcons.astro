@@ -1,0 +1,35 @@
+---
+const skills = [
+  { name: 'Golang', slug: 'go' },
+  { name: 'C++', slug: 'cplusplus' },
+  { name: 'Python', slug: 'python' },
+  { name: 'Nim', slug: 'nim' },
+  { name: 'JavaScript', slug: 'javascript' },
+  { name: 'TypeScript', slug: 'typescript' },
+  { name: 'OCaml', slug: 'ocaml' },
+  { name: 'React', slug: 'react' },
+  { name: 'Astro', slug: 'astro' },
+  { name: 'Node.js', slug: 'nodedotjs' },
+  { name: 'Docker', slug: 'docker' },
+  { name: 'GitHub', slug: 'github' },
+  { name: 'Linux', slug: 'linux' },
+];
+
+const getIconUrl = (slug: string) => `https://cdn.simpleicons.org/${slug}`;
+---
+
+<section class="skills-section">
+  <h2>Technologies & Tools</h2>
+  <div class="skills-grid">
+    {skills.map((skill) => (
+      <div class="skill-item">
+        <img 
+          src={getIconUrl(skill.slug)} 
+          alt={skill.name} 
+          class="skill-icon"
+        />
+        <span class="skill-name">{skill.name}</span>
+      </div>
+    ))}
+  </div>
+</section>

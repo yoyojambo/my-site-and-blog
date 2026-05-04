@@ -3,7 +3,14 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import TechIcons from '../components/TechIcons.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => a.data.order - b.data.order
+);
 ---
 
 <!doctype html>
@@ -15,17 +22,36 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	<Header />
 	<ThemeToggle />
 	<main>
-	  <h1>Hey there,</h1>
-	  <p>
-		Welcome to my page, I'm Omar, a passionate Computer Science student, still at
-	    the begginning of my journey and career. When I'm not lazing around I read
-	    and learn about low level or Cloud Native systems and anything that catches my eye.
-	  </p>
-	  
-	  <p>
-		You can check out some of my projects below, or shoot me an email at
-		<a href="mailto:omar@yoyojambo.com">omar@yoyojambo.com</a>.
-	  </p>
+	  <section class="intro">
+	    <h1>Hey there,</h1>
+	    <p>
+		  Welcome to my page, I'm Omar, a passionate Computer Science student, still at
+	      the begginning of my journey and career. When I'm not lazing around I read
+	      and learn about low level or Cloud Native systems and anything that catches my eye.
+	    </p>
+	    
+	    <p>
+		  You can check out some of my projects below, or shoot me an email at
+		  <a href="mailto:omar@yoyojambo.com">omar@yoyojambo.com</a>.
+	    </p>
+	  </section>
+
+	  <section class="projects">
+	    <h2>Projects</h2>
+	    <div class="project-grid">
+	      {projects.map((project) => (
+	        <ProjectCard 
+	          title={project.data.title}
+	          description={project.data.description}
+	          tools={project.data.tools}
+	          githubUrl={project.data.githubUrl}
+	          liveUrl={project.data.liveUrl}
+	        />
+	      ))}
+	    </div>
+	  </section>
+
+	  <TechIcons />
 	  
 	</main>
 	<Footer />
