@@ -16,8 +16,7 @@
 		"nodejs_compat"
 	],
 	"assets": {
-		"directory": "./dist",
-		"binding": "ASSETS"
+		"directory": "./dist/client"
 	},
 	"observability": {
 		"enabled": true
