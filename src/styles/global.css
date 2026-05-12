@@ -1,13 +1,49 @@
 /* ===== THEME SYSTEM ===== */
 /* Default Theme: Doom One (Dark) */
-:root,
+:root {
+  /* --- Light Theme Colors (Default) --- */
+  --theme-bg-page: #ffffff;
+  --theme-bg-component: #f8f8f8;
+  --theme-bg-card: #ffffff;
+  --theme-text-primary: #333333;
+  --theme-text-secondary: #666666;
+  --theme-text-link: #2337ff;
+  --theme-text-link-hover: #000d8a;
+  --theme-border-color: #e0e0e0;
+
+  /* --- Legacy Variables (Light Theme) --- */
+  --accent: #2337ff;
+  --accent-secondary: #D19A66; /* Mapping to Doom One Orange for consistency */
+  --accent-dark: #000d8a;
+  --black: 15, 18, 25;
+  --gray: 96, 115, 159;
+  --gray-light: 229, 233, 240;
+  --gray-dark: 34, 41, 57;
+  --gray-gradient: rgba(229, 233, 240, 50%), #fff;
+  --box-shadow:
+    0 2px 6px rgba(96, 115, 159, 25%),
+    0 8px 24px rgba(96, 115, 159, 33%),
+    0 16px 32px rgba(96, 115, 159, 33%);
+
+  /* --- Code Highlighting (Light Theme) --- */
+  --code-bg: #e5e9f0;
+  --code-text: #222939;
+  --code-keyword: #0066cc;
+  --code-string: #22863a;
+  --code-comment: #6a737d;
+  --code-number: #005cc5;
+  --code-function: #6f42c1;
+  --code-type: #005cc5;
+}
+
+/* Doom One Theme Override */
 :root.theme-doom-one {
   /* --- Doom One Color Palette --- */
   --doom-one-bg: #282C34;
   --doom-one-bg-alt: #21242B;
   --doom-one-bg-card: #2E323D;
   --doom-one-text: #ABB2BF;
-  --doom-one-text-alt: #5C6370;
+  --doom-one-text-alt: #8CA0B3; /* Brightened from #5C6370 */
   --doom-one-purple: #C678DD;
   --doom-one-blue: #61AFEF;
   --doom-one-cyan: #56B6B2;
@@ -26,7 +62,7 @@
   --theme-text-link-hover: var(--doom-one-orange);
   --theme-border-color: #3e4451;
 
-  /* --- Legacy Variables (mapped to current theme) --- */
+  /* --- Legacy Variables --- */
   --accent: var(--doom-one-purple);
   --accent-secondary: var(--doom-one-blue);
   --accent-dark: #A855C7;
@@ -34,7 +70,7 @@
   --gray: 92, 99, 112;
   --gray-light: 62, 68, 81;
   --gray-dark: 40, 44, 52;
-  --gray-gradient: rgba(var(--gray-light), 50%), var(--theme-bg-page);
+  --gray-gradient: rgba(62, 68, 81, 50%), var(--theme-bg-page);
   --box-shadow:
     0 2px 6px rgba(0, 0, 0, 0.3),
     0 8px 24px rgba(0, 0, 0, 0.2),
@@ -51,9 +87,8 @@
   --code-type: var(--doom-one-cyan);
 }
 
-/* Light Theme Override */
+/* Light Theme Override (kept for selector consistency if toggled) */
 :root.theme-light {
-  /* --- Light Theme Colors --- */
   --theme-bg-page: #ffffff;
   --theme-bg-component: #f8f8f8;
   --theme-bg-card: #ffffff;
@@ -62,24 +97,20 @@
   --theme-text-link: #2337ff;
   --theme-text-link-hover: #000d8a;
   --theme-border-color: #e0e0e0;
-
-  /* --- Legacy Variables (Light Theme) --- */
   --accent: #2337ff;
-  --accent-secondary: var(--doom-one-orange);
+  --accent-secondary: #D19A66;
   --accent-dark: #000d8a;
   --black: 15, 18, 25;
   --gray: 96, 115, 159;
   --gray-light: 229, 233, 240;
   --gray-dark: 34, 41, 57;
-  --gray-gradient: rgba(var(--gray-light), 50%), #fff;
+  --gray-gradient: rgba(229, 233, 240, 50%), #fff;
   --box-shadow:
-    0 2px 6px rgba(var(--gray), 25%),
-    0 8px 24px rgba(var(--gray), 33%),
-    0 16px 32px rgba(var(--gray), 33%);
-
-  /* --- Code Highlighting (Light Theme) --- */
-  --code-bg: rgb(var(--gray-light));
-  --code-text: rgb(var(--gray-dark));
+    0 2px 6px rgba(96, 115, 159, 25%),
+    0 8px 24px rgba(96, 115, 159, 33%),
+    0 16px 32px rgba(96, 115, 159, 33%);
+  --code-bg: #e5e9f0;
+  --code-text: #222939;
   --code-keyword: #0066cc;
   --code-string: #22863a;
   --code-comment: #6a737d;

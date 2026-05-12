@@ -14,8 +14,9 @@ to leave the comforts of my Emacs while producing well formatted PDFs.
 
 # Why org-mode?
 
-I am not getting into everything you can do in org-mode, other people have done that much
-better, but here is some of the stuff I do in org mode that I found useful for many classes:
+I won't get into everything you can do in org-mode, other people have done that much
+better, but here is some of the stuff I do in org mode that I found useful for many
+classes:
 
 1. Literate programming, or any other report-style deliverable with code and code results:
    * Executable code blocks in notes? org-mode.
@@ -47,7 +48,6 @@ etc.). But the basic document format probably does not look good enough to
 }
 ```
 
-asdasd
 ```go
 fmt.Println("Lol")
 ```
