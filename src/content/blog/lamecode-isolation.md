@@ -43,13 +43,13 @@ that anyone could also make their own deployment and host their own code challen
 This ended up driving me down an interesting path of the Linux kernel and container
 isolation.
 
-# What is the issue?
+## Why is this an issue?
 
 Containers themselves are isolating a group of processes and their resources from
 the host, but when your application runs within a container and it **needs** enforce similar
 control over child processes, it has much less power to do so.
 
-## How a container does it
+### How a container does it
 
 A container with a "normal" set of capabilities is created with kernel namespaces, cgroups
 and 
