@@ -3,7 +3,6 @@ title: "LameCode"
 description: "A secure code execution platform built from scratch using Go. It leverages WebAssembly runtimes like Wasmtime to sandbox and run user submissions in multiple languages like C, C++, and Rust. The frontend is a snappy SPA experience built with HTMX and Templ."
 tools: ["go", "htmx", "webassembly", "sqlite"]
 githubUrl: "https://github.com/yoyojambo/lameCode"
-liveUrl: "https://lamecode.yoyojambo.com"
 order: 3
 ---
 
@@ -26,4 +25,9 @@ overhead of heavy Docker containers.
 - **Go**: via TinyGo or the standard Go compiler
 
 ![Two Sum, as found if loaded into LameCode](/problema_lamecode.png)
+
+As of May 2026, lamecode is not deployed anywhere by me, but I am reuploading it soon! As
+soon as I finish the blog post I am writing about the process and the architecture. In any
+case, it was made so that it can be easily deployed by anyone, with a Docker container or
+natively.
 
