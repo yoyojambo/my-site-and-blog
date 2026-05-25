@@ -48,11 +48,7 @@ projects.sort((a, b) => a.data.order - b.data.order);
 	    <div class="project-grid">
 	      {projects.map((project) => (
 	        <ProjectCard 
-	          title={project.data.title}
-	          description={project.data.description}
-	          tools={project.data.tools}
-	          githubUrl={project.data.githubUrl}
-	          liveUrl={project.data.liveUrl}
+	          {...project.data}
 	          Content={project.Content}
 	        />
 	      ))}

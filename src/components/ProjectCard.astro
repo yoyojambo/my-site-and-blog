@@ -5,10 +5,11 @@ interface Props {
   tools: string[];
   githubUrl?: string;
   liveUrl?: string;
+  officialUrl?: string;
   Content: any;
 }
 
-const { title, description, tools, githubUrl, liveUrl, Content } = Astro.props;
+const { title, description, tools, githubUrl, liveUrl, officialUrl, Content } = Astro.props;
 
 // Helper to get Simple Icons URL
 const getIconUrl = (tool: string) => `https://cdn.simpleicons.org/${tool.toLowerCase().replace(/\s+/g, '')}`;
@@ -44,6 +45,12 @@ const modalId = `modal-${title.toLowerCase().replace(/\s+/g, '-')}`;
         <a href={liveUrl} target="_blank" rel="noopener noreferrer" class="project-link" onclick="event.stopPropagation()">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
           Live Demo
+        </a>
+      )}
+      {officialUrl && (
+        <a href={officialUrl} target="_blank" rel="noopener noreferrer" class="project-link" onclick="event.stopPropagation()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          Official Page
         </a>
       )}
     </div>
