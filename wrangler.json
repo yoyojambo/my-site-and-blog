@@ -6,10 +6,6 @@
 		{
 			"pattern": "yoyojambo.com",
 			"custom_domain": true
-		},
-		{
-			"pattern": "www.yoyojambo.com",
-			"custom_domain": true
 		}
 	],
 	"compatibility_flags": [
