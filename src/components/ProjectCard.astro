@@ -95,14 +95,16 @@ const modalId = `modal-${title.toLowerCase().replace(/\s+/g, '-')}`;
         modal.close();
       });
 
-      // Close modal on backdrop click
+      // Close modal on backdrop click (check against the inner container, not the dialog itself)
       modal.addEventListener('click', (e) => {
-        const dialogDimensions = modal.getBoundingClientRect();
+        const container = modal.querySelector('.modal-container') as HTMLElement;
+        if (!container) return;
+        const rect = container.getBoundingClientRect();
         if (
-          e.clientX < dialogDimensions.left ||
-          e.clientX > dialogDimensions.right ||
-          e.clientY < dialogDimensions.top ||
-          e.clientY > dialogDimensions.bottom
+          e.clientX < rect.left ||
+          e.clientX > rect.right ||
+          e.clientY < rect.top ||
+          e.clientY > rect.bottom
         ) {
           modal.close();
         }

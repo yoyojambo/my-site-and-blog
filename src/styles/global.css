@@ -573,12 +573,37 @@ hr {
   color: var(--accent-secondary);
 }
 
+.modal-body.prose > *:first-child {
+  margin-top: 0;
+}
+
 .modal-body.prose ul {
   margin-bottom: 1.5rem;
 }
 
 .modal-body.prose li {
   margin-bottom: 0.5rem;
+}
+
+.modal-body.prose img {
+  display: block;
+  margin: 1.5rem auto;
+}
+
+.modal-body.prose figure {
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.modal-body.prose figure img {
+  margin: 0 auto 0.75rem;
+}
+
+.modal-body.prose figcaption {
+  font-size: 0.85rem;
+  color: var(--theme-text-secondary);
+  font-style: italic;
+  line-height: 1.5;
 }
 
 /* Custom Scrollbar for Modal Body */

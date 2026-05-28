@@ -11,4 +11,9 @@ This website serves as both my digital business card and possibly in the future 
 of the stuff I've learned making stuff. I built it with **Astro** so I can stay centered
 on content but still get a lot of control on how that content is rendered.
 
-![Lets break out emacs and...](/break_out_emacs.gif)
+<figure>
+  <img src="/break_out_emacs.gif" alt="Let's break out emacs and..." />
+  <figcaption>
+	Mark Zuckerberg, when it's time to break out emacs and modify that Perl script
+  </figcaption>
+</figure>
