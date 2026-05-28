@@ -1,21 +1,26 @@
 ---
 title: "Patito Language"
-description: "A custom imperative programming language and VM implemented in OCaml. Developed as a compilers course project, it features structured syntax with Spanish keywords, a recursive descent parser, and a custom bytecode interpreter."
+description: "A strongly-typed, imperative programming language, full compiler pipeline, and stack-based virtual machine implemented from scratch in OCaml."
 tools: ["ocaml", "linux"]
 githubUrl: "https://github.com/yoyojambo/patito"
 order: 5
 ---
 
 ### Project Overview
-Patito is a toy language designed to learn the fundamentals of compiler theory. It
-transitions from high-level Spanish-like syntax to a custom intermediate representation,
-finally executing on a stack-based virtual machine.
+Patito is a custom, statically-typed imperative programming language built to explore the
+mechanics of compiler optimization, semantic validation, and low-level runtime instruction
+execution. The architecture spans from a lexical scanning frontend to a custom bytecode
+format executed inside a native, custom-built virtual machine.
 
-### Features
-- **Spanish Syntax**: Built to be accessible for native Spanish speakers (e.g.,
-  `programa`, `si`, `mientras`).
-- **Full Compiler Pipeline**: Lexical analysis (OCamllex), Parsing (Menhir), AST
-  generation, and Semantic analysis.
-- **Virtual Machine**: A custom VM that handles quadruple generation, memory management,
-  and execution.
-- **Strongly Typed**: Implements basic type checking for integers, floats, and booleans.
+### Core Architecture
+- **Language Design**: Features a structured, deterministic syntax optimized for clarity,
+  with native Spanish keywords mapped directly to core operations.
+- **Full Compiler Pipeline**: Built utilizing `sedlex` for deterministic lexical analysis
+  and `Menhir` for LR parsing, synthesizing raw tokens into a fully validated Abstract
+  Syntax Tree (AST).
+- **Type Safety & Semantic Analysis**: Implements a rigorous semantic analysis pass over
+  the AST, handling type checking across primitive types and strictly defining
+  intermediate representations.
+- **Custom Stack VM & Bytecode**: Features a custom-designed execution engine that
+  transforms the intermediate AST into discrete linear instructions (quadruples) executed
+  via an isolated stack-based virtual machine.

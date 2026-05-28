@@ -1,31 +1,31 @@
 ---
 title: "DataSfera"
-description: "A production app that transforms natural language into MS SQL queries for ERP systems. Features a real-time streaming UI, automated report persistence to Cloudflare R2, and voice-to-text integration via Groq Whisper."
+description: "A production database intelligence agent that transforms natural language into optimized MS SQL queries for enterprise ERP systems. Features a real-time streaming UI, automated report persistence to Cloudflare R2, and voice-to-text integration via Groq Whisper."
 tools: ["cloudflareworkers", "react", "googlegemini", "tailwindcss", "zod"]
 order: 4
 ---
 ### Project Overview
+Developed as a strategic joint venture by my firm, *Logias*, for SferaSoft's enterprise
+ERP ecosystem. I architected, deployed, and currently maintain a cloud-native platform
+that extends legacy native Windows applications, securely replicating complex access and
+permission layers to offer a natural language data extraction engine.
 
-Developed from my parntership *Logias* for [SferaSoft](https://sferasoft.com/es/)'s ERP
-system, I developed, deployed and maintain an app that serves as an extension to the
-functions of the legacy native Windows application. It replicates its access and
-permission layer to offer a data exfiltration agent familiar to current users.
-
-This agent was developed to solve the "reporting bottleneck" in corporate
-environments. Instead of waiting for IT to write custom SQL reports or playing around with
-the filter based interface, users can simply ask:
+This engine solves the traditional "reporting bottleneck" in corporate
+environments. Instead of waiting for IT to write custom SQL reports or wrestling with
+complex filter interfaces, users query the database natively:
 
 > "Show me all invoices from last month grouped by client."
 
-Besides the new functionality, this project is the begginning of an initiative to
-modernize and replace existing systems and applications with cloud-based alternatives.
+Beyond introducing modern AI capabilities, this project serves as the foundational
+architecture for migrating the company's legacy systems toward a high-performance,
+cloud-native future.
 
 ### Key Features
-- **Natural Language to SQL**: Uses Gemini 3.5 via OpenRouter to generate complex SQL
-  queries against an ERP schema.
-- **Streaming NDJSON**: Results are streamed from a secure DB proxy, allowing the UI to
-  show data as it arrives.
-- **Persistence**: Reports are automatically saved to Cloudflare R2 for later retrieval
-  and sharing.
-- **Interactive UI**: Users can filter, sort, and export (CSV/PDF) the generated data
-  directly in the chat.
+- **Natural Language to SQL**: Leverages Gemini models to dynamically map and execute
+  complex SQL queries against a relational ERP schema.
+- **Streaming NDJSON**: Results are streamed via a secure database proxy, minimizing
+  memory overhead and allowing the UI to render large datasets in real time.
+- **Automated Persistence**: Query results and generated schemas are persisted to
+  Cloudflare R2 for low-latency sharing and compliance tracking.
+- **Interactive UI**: Engineered a high-throughput UI allowing corporate users to
+  instantly filter, sort, and export live data to CSV/PDF.

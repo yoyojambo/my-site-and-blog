@@ -26,21 +26,32 @@ projects.sort((a, b) => a.data.order - b.data.order);
 	<ThemeToggle />
 	<main>
 	  <section class="intro">
-	    <p>
-		  I'm Omar Flores. I graduate from CS undergrad @ Tec de Monterrey June 2026,
-	      still at the begginning of my journey and career. I'm interested in working
-	      close to the OS, distributed systems and data driven applications.
-	    </p>
-	    
-	    <p>
-		  You can check out some of my projects below, or shoot me an email at
-		  <a href="mailto:omar@yoyojambo.com">omar@yoyojambo.com</a>.
-	    </p>
-
-		<p>
-		  You can check out some other achievements in
-		  the <a href="/about"><i>about</i></a> page.
-		</p>
+	    <div class="intro-container">
+	      <div class="intro-text">
+	        <p>
+	          I'm <strong>Omar Flores</strong>. I'm a systems-focused software engineer
+	          graduating from <strong>Tec de Monterrey</strong> in June 2026 (ranking 3rd
+	          in my campus in the <a href="/ceneval">national exam</a>). I build things at
+	          the intersection of distributed architectures and operating systems, from
+	          custom language compilers and WebAssembly sandboxing runtimes for online
+	          code judges to production-grade AI agents for enterprise ERP systems.
+	        </p>
+	        <p>
+	          I'm deeply interested in operating systems, distributed architectures,
+	          data-driven applications, and developer tooling.
+	        </p>
+	        <p>
+	          I am currently open to full-time software engineering roles in systems
+	          infrastructure, backend platforms, and cloud-native engineering. Explore my
+	          projects below, read more on my <a href="/about">about page</a>, or get in
+	          touch directly
+	          at <a href="mailto:omar@yoyojambo.com">omar@yoyojambo.com</a>.
+	        </p>
+	      </div>
+	      <div class="intro-avatar-wrapper">
+	        <img src="/me.png" alt="Omar Flores" class="intro-avatar" />
+	      </div>
+	    </div>
 	  </section>
 
 	  <section class="projects">
@@ -61,3 +72,90 @@ projects.sort((a, b) => a.data.order - b.data.order);
 	<Footer />
   </body>
 </html>
+
+<style>
+  .intro-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  .intro-text {
+    flex: 1;
+  }
+
+  .intro-text p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+    color: var(--theme-text-primary);
+  }
+
+  .intro-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .intro-avatar-wrapper {
+    position: relative;
+    flex-shrink: 0;
+    width: 200px;
+    height: 200px;
+  }
+
+  .intro-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 24px;
+    border: 3px solid var(--accent);
+    box-shadow: var(--box-shadow);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+    background: var(--theme-bg-component);
+  }
+
+  /* Subtle background glow effect matching theme accent */
+  .intro-avatar-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background: var(--accent);
+    border-radius: 24px;
+    filter: blur(12px);
+    opacity: 0.08;
+    z-index: -1;
+    transition: opacity 0.3s ease, filter 0.3s ease;
+  }
+
+  .intro-avatar-wrapper:hover .intro-avatar {
+    transform: translateY(-4px);
+    border-color: var(--accent-secondary);
+    box-shadow: 
+      0 12px 24px rgba(0, 0, 0, 0.2),
+      0 0 15px rgba(var(--accent), 0.15);
+  }
+
+  .intro-avatar-wrapper:hover::before {
+    opacity: 0.2;
+    filter: blur(18px);
+  }
+
+  @media (max-width: 720px) {
+    .intro-container {
+      flex-direction: column-reverse;
+      gap: 2rem;
+      text-align: center;
+    }
+    
+    .intro-avatar-wrapper {
+      width: 160px;
+      height: 160px;
+      margin: 0 auto;
+    }
+  }
+</style>
+

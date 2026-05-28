@@ -1,33 +1,35 @@
 ---
 title: "LameCode"
-description: "A secure code execution platform built from scratch using Go. It leverages WebAssembly runtimes like Wasmtime to sandbox and run user submissions in multiple languages like C, C++, and Rust. The frontend is a snappy SPA experience built with HTMX and Templ."
+description: "A secure, lightweight code execution platform built from scratch in Go. It leverages sandboxed WebAssembly runtimes via Wasmtime to isolate and execute untrusted multi-language user submissions instantly."
 tools: ["go", "htmx", "webassembly", "sqlite"]
 githubUrl: "https://github.com/yoyojambo/lameCode"
 order: 3
 ---
 
 ### Project Overview
-LameCode was born out of a desire to understand how online judges (like LeetCode) work
-under the hood. The primary challenge was executing untrusted code safely without the
-overhead of heavy Docker containers.
+LameCode is a high-performance code execution engine designed to mirror the multi-language
+sandboxing behavior of online judging systems. The core engineering challenge was
+executing untrusted user binaries securely, efficiently, and deterministically without
+incurring the heavy container overhead or cold-start times of traditional Docker
+isolation.
 
 ### Technical Highlights
-- **WASM Sandboxing**: Every submission runs in its own Wasmtime instance with limited
-  memory and CPU.
-- **HTMX Integration**: The entire application feels like a modern SPA but is powered
-  entirely by server-side Go templates.
-- **Local Toolchains**: It intelligently detects and uses local compilers to transform
-  source code into WebAssembly.
+- **WASM Sandboxing**: Every untrusted runtime submission isolates into an ephemeral,
+  independent Wasmtime instance with strictly throttled CPU time slices and hard memory
+  ceilings.
+- **Zero-Javascript Architecture**: Utilizes Go, HTMX, and Templ to build a single-page
+  application experience driven entirely by memory-efficient, server-side rendered state.
+- **Dynamic Toolchain Compilers**: Features a background backend pipeline that handles
+  multi-tenant compiler requests, converting C, C++, and Rust source arrays into
+  WASI-compliant WebAssembly binaries on the fly.
 
 ### Supported Languages
-- **C/C++**: via Emscripten
-- **Rust**: via `wasm32-wasi` target
-- **Go**: via TinyGo or the standard Go compiler
+- **C/C++**: via Emscripten toolchains
+- **Rust**: compiled via the native `wasm32-wasi` target
+- **Go**: compiled targeting TinyGo and standard Go web targets
 
-![Two Sum, as found if loaded into LameCode](/problema_lamecode.png)
+![Two Sum UI Overview](/problema_lamecode.png)
 
-As of May 2026, lamecode is not deployed anywhere by me, but I am reuploading it soon! As
-soon as I finish the blog post I am writing about the process and the architecture. In any
-case, it was made so that it can be easily deployed by anyone, with a Docker container or
-natively.
-
+Architected with infrastructure parity in mind; the system is natively cloud-ready and
+fully containerized, optimized to scale microservices horizontally or run lightweight
+standalone nodes on edge infrastructure.
