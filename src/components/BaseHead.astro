@@ -52,7 +52,7 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 			return localStorage.getItem('theme');
 		}
 		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-			return 'dark';
+			return 'doom-one';
 		}
 		return 'light';
 	})();
