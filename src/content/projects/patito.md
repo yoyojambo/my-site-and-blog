@@ -15,8 +15,8 @@ format executed inside a native, custom-built virtual machine.
 ### Core Architecture
 - **Language Design**: Features a structured, deterministic syntax optimized for clarity,
   with native Spanish keywords mapped directly to core operations.
-- **Full Compiler Pipeline**: Built utilizing `sedlex` for deterministic lexical analysis
-  and `Menhir` for LR parsing, synthesizing raw tokens into a fully validated Abstract
+- **Full Compiler Pipeline**: Built utilizing [sedlex](https://github.com/ocaml-community/sedlex) for deterministic lexical analysis
+  and [Menhir](https://gallium.inria.fr/~fpottier/menhir/) for LR parsing, synthesizing raw tokens into a fully validated Abstract
   Syntax Tree (AST).
 - **Type Safety & Semantic Analysis**: Implements a rigorous semantic analysis pass over
   the AST, handling type checking across primitive types and strictly defining
