@@ -1,38 +1,152 @@
 ---
-const skills = [
-  { name: 'Golang', slug: 'go' },
+const getIconUrl = (slug: string) => `https://cdn.simpleicons.org/${slug}`;
+
+const backend = [
+  { name: 'Go', slug: 'go' },
   { name: 'TypeScript', slug: 'typescript' },
-  { name: 'JavaScript', slug: 'javascript' },
-  { name: 'HTMX', slug: 'htmx' },
-  { name: 'WebAssembly', slug: 'webassembly' },
-  { name: 'C++', slug: 'cplusplus' },
   { name: 'Python', slug: 'python' },
-  { name: 'OCaml', slug: 'ocaml' },
-  { name: 'React', slug: 'react' },
-  { name: 'Astro', slug: 'astro' },
-  { name: 'Node.js', slug: 'nodedotjs' },
-  { name: 'Cloudflare', slug: 'cloudflare' },
-  { name: 'Gemini', slug: 'googlegemini' },
+];
+
+const machineLearning = [
+  { name: 'Jupyter', slug: 'jupyter' },
+  { name: 'SkLearn', slug: 'scikitlearn' },
+  { name: 'Pandas', slug: 'Pandas' },
+  { name: 'Numpy', slug: 'numpy' },
+];
+
+const infra = [
   { name: 'Docker', slug: 'docker' },
-  { name: 'GitHub', slug: 'github' },
+  { name: 'Cloudflare', slug: 'cloudflare' },
+  { name: 'Github', slug: 'github' },
   { name: 'Linux', slug: 'linux' },
 ];
 
-const getIconUrl = (slug: string) => `https://cdn.simpleicons.org/${slug}`;
+const systems = [
+  { name: 'Go', slug: 'go' },
+  { name: 'OCaml', slug: 'ocaml'},
+  { name: 'C++', slug: 'cplusplus' },
+  { name: 'Linux', slug: 'linux' },
+];
 ---
 
-<section class="skills-section">
-  <h2>Technologies & Tools</h2>
-  <div class="skills-grid">
-    {skills.map((skill) => (
+<section class="skills-wrapper">
+  <h2>Tech I like</h2>
+
+  <!-- Backend -->
+  <div class="category-block">
+    <h4>Backend</h4>
+      <p>
+		I feel most comfortable with strongly typed systems
+		languages. <a href="https://go.dev/">Go</a> is my go-to (hah!) for writing backend
+		services. Great DX, tooling, and resources.
+	  </p>
+    <div class="skills-grid">
+      {backend.map((skill) => (
+        <div class="skill-item">
+          <img src={getIconUrl(skill.slug)} alt={skill.name} class="skill-icon" />
+          <span>{skill.name}</span>
+        </div>
+      ))}
+
       <div class="skill-item">
-        <img 
-          src={getIconUrl(skill.slug)} 
-          alt={skill.name} 
-          class="skill-icon"
-        />
-        <span class="skill-name">{skill.name}</span>
+        <img src="https://img.icons8.com/?size=100&id=2572&format=png&color=f89820"
+        alt="Java" class="skill-icon" />
+        <span>Java</span>
       </div>
-    ))}
+	  
+    </div>
+
+	<p>TypeScript and Java can be very auto-magical, and that is pretty great when it
+	works, but I find that I often like to understand everything going on inside my web
+	services, allows me to get up and running with a new framework quicker.</p>
+  </div>
+
+  <!-- ML -->
+  <div class="category-block">
+    <h4>Machine Learning</h4>
+    <p>
+	  My concentration in Advanced AI for Data Science was truly eye-opening. Jupyter is a
+	  great tool for literate programming and allowed me to create great, reproducible
+	  reports with all the great open-source python tools in the area.
+	</p>
+    <div class="skills-grid">
+      {machineLearning.map((skill) => (
+        <div class="skill-item">
+          <img src={getIconUrl(skill.slug)} alt={skill.name} class="skill-icon" />
+          <span>{skill.name}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Infra -->
+  <div class="category-block">
+    <h4>Infrastructure & Tools</h4>
+	<p>
+	  Of course, I like easily reproducible environments, and containarized applications
+	  and serverless platforms are the best way I know to deploy software. Sprinkle some
+	  Github Action's for CI/CD and you have it all up and running, just like in your dev
+	  machine.
+	</p>
+    <div class="skills-grid">
+      {infra.map((skill) => (
+        <div class="skill-item">
+          <img src={getIconUrl(skill.slug)} alt={skill.name} class="skill-icon" />
+          <span>{skill.name}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Systems -->
+  <div class="category-block">
+    <h4>Systems programming</h4>
+	<p>
+	  I don't think it matters what layer of the stack you work on, or how far removed
+	  your code is from the metal it eventually runs on, every engineer benefits from
+	  doing small experiments and learning about the low level systems the world runs on.
+	</p>
+    <div class="skills-grid">
+      {systems.map((skill) => (
+        <div class="skill-item">
+          <img src={getIconUrl(skill.slug)} alt={skill.name} class="skill-icon" />
+          <span>{skill.name}</span>
+        </div>
+      ))}
+    </div>
   </div>
 </section>
+
+<style>
+  .skills-wrapper {
+	padding-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+  .category-block h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+  }
+  .category-block p {
+    margin-bottom: 1rem;
+    max-width: 60ch;
+	font-size: 1.1rem;
+  }
+  .skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .skill-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+  }
+  .skill-icon {
+    width: 32px;
+    height: 32px;
+  }
+</style>
